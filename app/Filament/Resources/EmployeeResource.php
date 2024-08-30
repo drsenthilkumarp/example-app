@@ -12,18 +12,49 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
 class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'project1';
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+            Forms\Components\Section::make('User Name')
+            ->description('Put the user name details in')
+            ->schema([
+            Forms\Components\TextInput::make('first_name')
+            ->required()
+            ->maxLength(255),
+            Forms\Components\TextInput::make('last_name')
+            ->required()
+            ->maxLength(255),
+            Forms\Components\TextInput::make('middle_name')
+            ->required()
+            ->maxLength(255),
+            ])->columns(3),
+
+            Forms\Components\Section::make('User Address')
+            //->description('Put the user name details in')
+            ->schema([
+            Forms\Components\TextInput::make('address')
+            ->required()
+            ->maxLength(255),
+            Forms\Components\TextInput::make('zip_code')
+            ->required()
+            ->maxLength(255),
+            ])->columns(2),
+            Forms\Components\Section::make('User Address')
+            //->description('Put the user name details in')
+            ->schema([
+            Forms\Components\DatePicker::make('date_of_birth')
+            ->required(),
+            Forms\Components\DatePicker::make('date_hired')
+            ->required(),
+            ])->columns(2),
             ]);
     }
 

@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('piclabs', function (Blueprint $table) {
-            //
-            $table->string('regnumber')->nullable()->after('id');
+        Schema::create('leaves', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->string('leave_type');
+            $table->string('purpose');
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->string('user_id');
         });
     }
 
@@ -22,9 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('piclabs', function (Blueprint $table) {
-            //
-            $table->dropColumn('regnumber');
-        });
+        Schema::dropIfExists('leaves');
     }
 };

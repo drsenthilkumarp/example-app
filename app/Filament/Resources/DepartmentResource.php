@@ -18,7 +18,8 @@ class DepartmentResource extends Resource
     protected static ?string $model = Department::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+   // protected static ?int $navigationSort = 8;
+    protected static ?string $navigationGroup = 'project1';
     public static function form(Form $form): Form
     {
         return $form
