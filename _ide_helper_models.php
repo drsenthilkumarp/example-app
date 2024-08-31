@@ -248,6 +248,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Profile whereWardenPhoneNumber($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Profile whereYear($value)
  * @mixin \Eloquent
+ * @property string $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Profile whereUserId($value)
  */
 	class Profile extends \Eloquent {}
 }
