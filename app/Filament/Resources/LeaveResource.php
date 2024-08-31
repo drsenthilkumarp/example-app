@@ -68,8 +68,8 @@ class LeaveResource extends Resource
 
         if (! $isAdmin) {
             $columns = array_merge(
-          [Tables\Columns\TextColumn::make('user_id')->searchable()],
-            $columns
+                [Tables\Columns\TextColumn::make('user_id')->searchable()],
+                $columns
             );
         }
 
