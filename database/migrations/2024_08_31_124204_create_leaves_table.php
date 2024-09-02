@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('studentprofiles', function (Blueprint $table) {
+        Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('pskill_name');
-            $table->string('level');
-            $table->date('date');
-            $table->string('status');
-            $table->string('user_id');
-
+            $table->string('leave_type');
+            $table->string('purpose');
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('studentprofiles');
+        Schema::dropIfExists('leaves');
     }
 };

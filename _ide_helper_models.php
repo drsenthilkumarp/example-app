@@ -148,7 +148,8 @@ namespace App\Models{
  * @property string $purpose
  * @property string $from_date
  * @property string $to_date
- * @property string $user_id
+ * @property int $user_id
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Leave newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Leave newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Leave query()
@@ -320,7 +321,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|StudentProfile whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|StudentProfile whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property string $user_id
+ * @property int $user_id
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|StudentProfile whereUserId($value)
  */
 	class StudentProfile extends \Eloquent {}

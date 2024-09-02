@@ -15,5 +15,11 @@ class Leave extends Model
         'from_date',
         'to_date',
         'user_id',
+        'student_name',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

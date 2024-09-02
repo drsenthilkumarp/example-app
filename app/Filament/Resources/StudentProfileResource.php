@@ -59,14 +59,27 @@ class StudentProfileResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $user = Auth::user();
+        $isAdmin = $user && $user->hasRole('student');
+        $columns = [
+            Tables\Columns\TextColumn::make('pskill_name')->searchable(),
+            Tables\Columns\TextColumn::make('level')->searchable(),
+            Tables\Columns\TextColumn::make('date')->searchable(),
+            Tables\Columns\TextColumn::make('status')->searchable(),
+        ];
+
+        if (! $isAdmin) {
+            $columns = array_merge(
+                //  [Tables\Columns\TextColumn::make('user_id')->searchable()],
+                [Tables\Columns\TextColumn::make('User.name')->label('Student Name')],
+                //  [Tables\Columns\TextColumn::make('User.email')->label('Email Id')],
+                $columns
+            );
+        }
+
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('pskill_name')->searchable(),
-                Tables\Columns\TextColumn::make('level')->searchable(),
-                Tables\Columns\TextColumn::make('date')->searchable(),
-                Tables\Columns\TextColumn::make('status')->searchable(),
-                Tables\Columns\TextColumn::make('user_id')->searchable(),
-            ])
+            ->columns($columns) // Pass the columns array directly
+
             ->filters([
                 //
             ])

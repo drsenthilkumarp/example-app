@@ -45,14 +45,6 @@ class LeaveResource extends Resource
 
     public static function table(Table $table): Table
     {
-        /*      return $table
-                  ->columns([
-                      Tables\Columns\TextColumn::make('leave_type')->searchable(),
-                      Tables\Columns\TextColumn::make('purpose')->searchable(),
-                      Tables\Columns\TextColumn::make('from_date')->searchable(),
-                      Tables\Columns\TextColumn::make('to_date')->searchable(),
-                      Tables\Columns\TextColumn::make('user_id')->searchable(),
-                  ])*/
 
         $user = Auth::user();
         $isAdmin = $user && $user->hasRole('student'); // Adjust this line based on your role checking method
@@ -68,7 +60,9 @@ class LeaveResource extends Resource
 
         if (! $isAdmin) {
             $columns = array_merge(
-                [Tables\Columns\TextColumn::make('user_id')->searchable()],
+                //  [Tables\Columns\TextColumn::make('user_id')->searchable()],
+                [Tables\Columns\TextColumn::make('User.name')->label('Student Name')],
+                [Tables\Columns\TextColumn::make('User.email')->label('Email Id')],
                 $columns
             );
         }
