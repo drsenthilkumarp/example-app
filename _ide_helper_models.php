@@ -18,12 +18,23 @@ namespace App\Models{
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $subject_name
+ * @property string $semester
+ * @property string $grade
+ * @property string $status
+ * @property int|null $user_id
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Academic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Academic newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Academic query()
  * @method static \Illuminate\Database\Eloquent\Builder|Academic whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academic whereGrade($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Academic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academic whereSemester($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academic whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academic whereSubjectName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Academic whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academic whereUserId($value)
  */
 	class Academic extends \Eloquent {}
 }
@@ -35,12 +46,23 @@ namespace App\Models{
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $subject_name
+ * @property string $semester
+ * @property string $grade
+ * @property string $status
+ * @property int|null $user_id
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Academics newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Academics newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Academics query()
  * @method static \Illuminate\Database\Eloquent\Builder|Academics whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academics whereGrade($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Academics whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academics whereSemester($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academics whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academics whereSubjectName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Academics whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Academics whereUserId($value)
  */
 	class Academics extends \Eloquent {}
 }
@@ -149,6 +171,7 @@ namespace App\Models{
  * @property string $from_date
  * @property string $to_date
  * @property int $user_id
+ * @property string $status
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Leave newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Leave newQuery()
@@ -158,6 +181,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereLeaveType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave wherePurpose($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Leave whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereToDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Leave whereUserId($value)

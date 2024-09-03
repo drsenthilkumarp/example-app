@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,15 @@ class LeaveResource extends Resource
                     ->required(),
                 Forms\Components\Hidden::make('user_id')
                     ->default(Auth::id()), // Automatically set the user_id to the current user's ID
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
+                    ->required()
+                    ->visible(fn (Forms\Components\Select $component) => Auth::user()->hasRole('super_admin')), // Admins can set status
             ]);
     }
 
@@ -55,6 +65,7 @@ class LeaveResource extends Resource
             Tables\Columns\TextColumn::make('from_date')->searchable(),
             Tables\Columns\TextColumn::make('to_date')->searchable(),
             Tables\Columns\TextColumn::make('purpose')->searchable(),
+            Tables\Columns\TextColumn::make('status')->searchable(),
 
         ];
 
@@ -74,7 +85,23 @@ class LeaveResource extends Resource
                 // You can add filters here if needed
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //  Tables\Actions\EditAction::make(),
+                Action::make('approve')
+                    ->button()
+                    ->label('Approve')
+                    ->icon('heroicon-o-check')
+                    ->color('success')
+                    ->action(fn (Leave $record) => $record->update(['status' => 'approved']))
+                    ->visible(fn (Leave $record) => $record->status === 'pending'),
+
+                Action::make('reject')
+                    ->button()
+                    ->label('Reject')
+                 //   ->icon('heroicon-o-x')
+                    //->icon('heroicon-o-x')
+                    ->color('danger')
+                    ->action(fn (Leave $record) => $record->update(['status' => 'rejected']))
+                    ->visible(fn (Leave $record) => $record->status === 'pending'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

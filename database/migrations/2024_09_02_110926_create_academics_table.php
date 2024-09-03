@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('academics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('leave_type');
-            $table->string('purpose');
-            $table->date('from_date');
-            $table->date('to_date');
+            $table->string('subject_name');
+            $table->string('semester');
+            $table->string('grade');
+            $table->string('status');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('academics');
     }
 };

@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicsResource extends Resource
 {
@@ -22,10 +23,10 @@ class AcademicsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Subject name')
+                Forms\Components\TextInput::make('subject_name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('Semester')
+                Forms\Components\Select::make('semester')
                     ->label('Year')
                     ->options([
                         'I' => 'I',
@@ -36,23 +37,44 @@ class AcademicsResource extends Resource
                         'VI' => 'VI',
                         'VII' => 'VII',
                         'VIII' => 'VIII', ]),
-                Forms\Components\TextInput::make('Grade')
+                Forms\Components\TextInput::make('grade')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Select::make('Status')
+                Forms\Components\Select::make('status')
                     ->label('Status')
                     ->options([
                         'Pass' => 'Pass',
                         'Arrear' => 'Arrear', ]),
+                Forms\Components\Hidden::make('user_id')
+                    ->default(Auth::id()),
             ]);
     }
 
     public static function table(Table $table): Table
     {
+
+        $user = Auth::user();
+        $isAdmin = $user && $user->hasRole('student'); // Adjust this line based on your role checking method
+
+        $columns = [
+            Tables\Columns\TextColumn::make('subject_name')->searchable(),
+            Tables\Columns\TextColumn::make('semester')->searchable(),
+            Tables\Columns\TextColumn::make('grade')->searchable(),
+            Tables\Columns\TextColumn::make('status')->searchable(),
+
+        ];
+
+        if (! $isAdmin) {
+            $columns = array_merge(
+                //  [Tables\Columns\TextColumn::make('user_id')->searchable()],
+                [Tables\Columns\TextColumn::make('user.name')->label('Student Name')],
+                [Tables\Columns\TextColumn::make('user.email')->label('Email Id')],
+                $columns
+            );
+        }
+
         return $table
-            ->columns([
-                //
-            ])
+            ->columns($columns) // Pass the columns array directly
             ->filters([
                 //
             ])

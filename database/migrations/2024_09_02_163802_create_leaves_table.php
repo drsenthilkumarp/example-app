@@ -11,9 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('academics', function (Blueprint $table) {
+        Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('leave_type');
+            $table->string('purpose');
+            $table->date('from_date');
+            $table->date('to_date');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('status')->default('pending');
         });
     }
 
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('academics');
+        Schema::dropIfExists('leaves');
     }
 };

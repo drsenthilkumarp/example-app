@@ -16,6 +16,7 @@ class Leave extends Model
         'to_date',
         'user_id',
         'student_name',
+        'status',
     ];
 
     public function user()
