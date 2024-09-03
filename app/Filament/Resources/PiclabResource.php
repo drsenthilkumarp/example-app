@@ -32,6 +32,7 @@ class PiclabResource extends Resource
                 TextInput::make('name')->required(),
                 TextInput::make('year')->required(),
                 TextInput::make('department')->required(),
+                TextInput::make('mentor_name')->required(),
 
             ]);
     }
